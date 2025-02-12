@@ -23,10 +23,10 @@ export default function RootLayout({
           <div className="max-w-7xl mx-auto">
             <div className="flex justify-between h-20">
               <div className="flex-shrink-0 flex items-center flex-col justify-center">
-                <p className="text-xs text-gray-600 mb-1 mt-2 pl-[10px]">
+                <p className="text-xs text-gray-600 mb-1 mt-2 pl-[20px]">
                   盛岡のウェディングケーキやバースデーケーキはモダンタイムスへ
                 </p>
-                <Link href="/" className="relative w-80 h-16 pl-[10px]">
+                <Link href="/" className="relative w-80 h-16 pl-[20px]">
                   <Image
                     src="/images/site-logo.png"
                     alt="モダンタイムス - 記念日ケーキ専門店"
