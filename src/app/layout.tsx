@@ -26,7 +26,7 @@ export default function RootLayout({
                 <p className="text-xs text-gray-600 mb-1 mt-2 pl-[30px]">
                   盛岡のウェディングケーキやバースデーケーキはモダンタイムスへ
                 </p>
-                <Link href="/" className="relative w-80 h-16 pl-[20px]">
+                <Link href="/" className="relative w-80 h-16 pl-[10px]">
                   <Image
                     src="/images/site-logo.png"
                     alt="モダンタイムス - 記念日ケーキ専門店"
