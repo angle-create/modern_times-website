@@ -3,6 +3,7 @@
 import { useSession } from 'next-auth/react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const navigation = [
   { name: 'ダッシュボード', href: '/admin' },
@@ -28,8 +29,14 @@ export default function AdminLayout({
           <div className="flex justify-between h-16">
             <div className="flex">
               <div className="flex-shrink-0 flex items-center">
-                <Link href="/admin" className="text-2xl font-bold text-brown-600">
-                  Modern Times 管理画面
+                <Link href="/admin" className="relative w-40 h-8">
+                  <Image
+                    src="/images/site-logo.png"
+                    alt="Modern Times 管理画面"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
                 </Link>
               </div>
             </div>
