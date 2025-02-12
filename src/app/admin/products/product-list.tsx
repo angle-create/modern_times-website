@@ -5,6 +5,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
 import { DeleteDialog } from './delete-dialog'
+import { deleteProduct } from './actions'
+import { useRouter } from 'next/navigation'
 
 type ProductWithCategory = Product & {
   category: Category
@@ -16,14 +18,20 @@ interface ProductListProps {
 
 export function ProductList({ products }: ProductListProps) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const router = useRouter()
 
-  async function deleteProduct(id: number) {
-    const response = await fetch(`/api/products/${id}`, {
-      method: 'DELETE',
-    })
-
-    if (!response.ok) {
-      throw new Error('商品の削除に失敗しました')
+  async function handleDelete(id: number) {
+    try {
+      setIsDeleting(true)
+      await deleteProduct(id)
+      setSelectedProduct(null)
+      router.refresh()
+    } catch (error) {
+      console.error('削除に失敗しました:', error)
+      // TODO: エラー表示の実装
+    } finally {
+      setIsDeleting(false)
     }
   }
 
@@ -113,8 +121,9 @@ export function ProductList({ products }: ProductListProps) {
                   <button
                     onClick={() => setSelectedProduct(product)}
                     className="text-red-600 hover:text-red-900"
+                    disabled={isDeleting}
                   >
-                    削除
+                    {isDeleting ? '削除中...' : '削除'}
                   </button>
                 </td>
               </tr>
@@ -127,7 +136,7 @@ export function ProductList({ products }: ProductListProps) {
         <DeleteDialog
           isOpen={true}
           onClose={() => setSelectedProduct(null)}
-          onConfirm={() => deleteProduct(selectedProduct.id)}
+          onConfirm={() => handleDelete(selectedProduct.id)}
           productName={selectedProduct.name}
         />
       )}
