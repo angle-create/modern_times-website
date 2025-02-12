@@ -61,7 +61,7 @@ export function HeroSlider() {
               />
               <div className="absolute inset-0 bg-black bg-opacity-40 rounded-lg">
                 <div className="h-full flex items-center">
-                  <div className="text-white">
+                  <div className="text-white pl-12">
                     <h2 className="text-4xl font-bold mb-4">{slide.title}</h2>
                     <p className="text-xl">{slide.description}</p>
                   </div>
