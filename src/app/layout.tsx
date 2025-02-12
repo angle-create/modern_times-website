@@ -7,7 +7,7 @@ import Image from 'next/image'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Modern Times',
+  title: 'モダンタイムス',
   description: '記念日ケーキ専門店 - 大切な記念日を彩る特別なケーキをお届けします',
 }
 
@@ -20,41 +20,44 @@ export default function RootLayout({
     <html lang="ja">
       <body className={inter.className}>
         <header className="bg-white shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between h-16">
-              <div className="flex-shrink-0 flex items-center">
-                <Link href="/" className="relative w-80 h-16">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex justify-between h-20">
+              <div className="flex-shrink-0 flex items-center flex-col justify-center">
+                <p className="text-xs text-gray-600 mb-1 mt-2">
+                  盛岡のウェディングケーキやバースデーケーキはモダンタイムスへ
+                </p>
+                <Link href="/" className="relative w-80 h-16 pl-[10px]">
                   <Image
                     src="/images/site-logo.png"
-                    alt="Modern Times - 記念日ケーキ専門店"
+                    alt="モダンタイムス - 記念日ケーキ専門店"
                     fill
-                    className="object-contain"
+                    className="object-contain object-left"
                     priority
                   />
                 </Link>
               </div>
-              <nav className="hidden sm:flex sm:space-x-8 items-center">
+              <nav className="hidden sm:flex sm:space-x-8 items-center pr-4 sm:pr-6 lg:pr-8 pt-8">
                 <Link
                   href="/products"
-                  className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-brown-600"
+                  className="inline-flex items-center px-1 text-base font-medium text-gray-900 hover:text-brown-600"
                 >
                   商品一覧
                 </Link>
                 <Link
                   href="/about"
-                  className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-brown-600"
+                  className="inline-flex items-center px-1 text-base font-medium text-gray-900 hover:text-brown-600"
                 >
                   店舗案内
                 </Link>
                 <Link
                   href="/news"
-                  className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-brown-600"
+                  className="inline-flex items-center px-1 text-base font-medium text-gray-900 hover:text-brown-600"
                 >
                   お知らせ
                 </Link>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-brown-600"
+                  className="inline-flex items-center px-1 text-base font-medium text-gray-900 hover:text-brown-600"
                 >
                   お問い合わせ
                 </Link>
@@ -70,7 +73,7 @@ export default function RootLayout({
                 <Link href="/" className="relative w-80 h-16 mb-4 inline-block">
                   <Image
                     src="/images/site-logo.png"
-                    alt="Modern Times - 記念日ケーキ専門店"
+                    alt="モダンタイムス - 記念日ケーキ専門店"
                     fill
                     className="object-contain"
                   />
