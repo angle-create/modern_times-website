@@ -74,18 +74,33 @@ model Category {
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
-  categoryId  Int      @map("category_id")
-  name        String   @db.VarChar(200)
-  description String?  @db.Text
+  id          Int           @id @default(autoincrement())
+  categoryId  Int          @map("category_id")
+  name        String       @db.VarChar(200)
+  description String?      @db.Text
   price       Int
-  imageUrl    String?  @map("image_url") @db.VarChar(500)
-  isAvailable Boolean  @default(true) @map("is_available")
-  category    Category @relation(fields: [categoryId], references: [id])
-  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
-  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  imageUrl    String?      @map("image_url") @db.VarChar(500)
+  isAvailable Boolean      @default(true) @map("is_available")
+  stock       Int          @default(0)
+  alertThreshold Int       @default(5) @map("alert_threshold")
+  category    Category     @relation(fields: [categoryId], references: [id])
+  stockLogs   StockLog[]
+  createdAt   DateTime     @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime     @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
 
   @@map("products")
+}
+
+model StockLog {
+  id          Int      @id @default(autoincrement())
+  productId   Int      @map("product_id")
+  quantity    Int
+  type        String   @db.VarChar(20) // 'increase' or 'decrease'
+  note        String?  @db.Text
+  product     Product  @relation(fields: [productId], references: [id])
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  @@map("stock_logs")
 }
 
 model News {
