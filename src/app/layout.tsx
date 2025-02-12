@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Modern Times',
-  description: '自家焙煎コーヒーとこだわりの珈琲器具のお店',
+  description: '記念日ケーキ専門店 - 大切な記念日を彩る特別なケーキをお届けします',
 }
 
 export default function RootLayout({
@@ -26,7 +26,7 @@ export default function RootLayout({
                 <Link href="/" className="relative w-80 h-16">
                   <Image
                     src="/images/site-logo.png"
-                    alt="Modern Times"
+                    alt="Modern Times - 記念日ケーキ専門店"
                     fill
                     className="object-contain"
                     priority
@@ -70,13 +70,13 @@ export default function RootLayout({
                 <Link href="/" className="relative w-80 h-16 mb-4 inline-block">
                   <Image
                     src="/images/site-logo.png"
-                    alt="Modern Times"
+                    alt="Modern Times - 記念日ケーキ専門店"
                     fill
                     className="object-contain"
                   />
                 </Link>
                 <p className="text-gray-500 text-sm">
-                  自家焙煎コーヒーとこだわりの珈琲器具のお店
+                  記念日ケーキ専門店 - 大切な記念日を彩る特別なケーキをお届けします
                 </p>
               </div>
               <div>
