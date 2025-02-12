@@ -4,7 +4,10 @@ import './globals.css'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 
-const notoSansJP = Noto_Sans_JP({ subsets: ['latin'] })
+const notoSansJP = Noto_Sans_JP({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+})
 
 export const metadata: Metadata = {
   title: 'Modern Times - ケーキ専門店',
