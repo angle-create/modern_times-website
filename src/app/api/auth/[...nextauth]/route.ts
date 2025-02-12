@@ -1,12 +1,9 @@
 import { NextAuthOptions } from 'next-auth'
 import NextAuth from 'next-auth/next'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import { PrismaAdapter } from '@auth/prisma-adapter'
 import { prisma } from '@/lib/prisma'
-import { compare } from 'bcrypt'
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -29,36 +26,50 @@ export const authOptions: NextAuthOptions = {
           throw new Error('ユーザーが見つかりません')
         }
 
-        // Note: In a real application, you would hash the password and store it
-        // For demo purposes, we're using a direct comparison
         if (user.role !== 'admin') {
           throw new Error('管理者権限がありません')
         }
 
-        return user
+        return {
+          id: user.id,
+          email: user.email,
+          role: user.role
+        }
       }
     })
   ],
   session: {
-    strategy: 'jwt'
+    strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   pages: {
-    signIn: '/admin/login'
+    signIn: '/admin/login',
+    error: '/admin/login',
+    signOut: '/admin/login'
   },
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
         token.role = user.role
+        token.email = user.email
       }
       return token
     },
     async session({ session, token }) {
-      if (session?.user) {
-        session.user.role = token.role as string
+      if (session.user) {
+        session.user.role = token.role
+        session.user.email = token.email
       }
       return session
+    },
+    async redirect({ url, baseUrl }) {
+      if (url.startsWith('/admin')) {
+        return url
+      }
+      return baseUrl + '/admin'
     }
-  }
+  },
+  secret: process.env.NEXTAUTH_SECRET
 }
 
 const handler = NextAuth(authOptions)

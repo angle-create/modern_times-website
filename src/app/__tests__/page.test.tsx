@@ -5,30 +5,27 @@ describe('Home', () => {
   it('メインコンテンツが表示されること', () => {
     render(<Home />)
     
-    // ヘッダーテキストが表示されることを確認
-    expect(screen.getByRole('heading', { name: /Modern Times/i })).toBeInTheDocument()
-    
     // メインビジュアルが表示されることを確認
-    expect(screen.getByRole('img', { name: /main visual/i })).toBeInTheDocument()
+    expect(screen.getByRole('img', { name: 'Modern Times店内' })).toBeInTheDocument()
     
-    // 新着商品セクションが表示されることを確認
-    expect(screen.getByText(/新着商品/i)).toBeInTheDocument()
+    // おすすめ商品セクションが表示されることを確認
+    expect(screen.getByRole('heading', { name: 'おすすめ商品' })).toBeInTheDocument()
   })
 
-  it('商品一覧へのリンクが機能すること', () => {
+  it('メニューページへのリンクが機能すること', () => {
     render(<Home />)
     
-    const productLink = screen.getByRole('link', { name: /商品一覧へ/i })
-    expect(productLink).toBeInTheDocument()
-    expect(productLink).toHaveAttribute('href', '/products')
+    const menuLink = screen.getByRole('link', { name: 'メニューを見る' })
+    expect(menuLink).toBeInTheDocument()
+    expect(menuLink).toHaveAttribute('href', '/menu')
   })
 
   it('お知らせセクションが表示されること', () => {
     render(<Home />)
     
-    expect(screen.getByText(/お知らせ/i)).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'お知らせ' })).toBeInTheDocument()
     // お知らせ一覧へのリンクを確認
-    const newsLink = screen.getByRole('link', { name: /お知らせ一覧へ/i })
+    const newsLink = screen.getByRole('link', { name: 'お知らせ一覧を見る' })
     expect(newsLink).toBeInTheDocument()
     expect(newsLink).toHaveAttribute('href', '/news')
   })

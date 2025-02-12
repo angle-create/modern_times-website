@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import Cart from '../page'
 import { useRouter } from 'next/navigation'
+import { getCartItems } from '@/lib/api'
 
 // モックデータ
 const mockCartItems = [
@@ -106,5 +107,28 @@ describe('Cart', () => {
     
     // 注文ページに遷移することを確認
     expect(mockPush).toHaveBeenCalledWith('/checkout')
+  })
+
+  it('空のカートの場合、適切なメッセージが表示されること', async () => {
+    // カートが空の場合のモック
+    (getCartItems as jest.Mock).mockResolvedValueOnce([])
+    
+    render(<Cart />)
+
+    expect(screen.getByText('カートに商品がありません')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: '商品一覧へ' })).toHaveAttribute('href', '/products')
+  })
+
+  it('レジに進むボタンが表示されること', async () => {
+    render(<Cart />)
+
+    const checkoutButton = screen.getByRole('link', { name: 'レジに進む' })
+    expect(checkoutButton).toBeInTheDocument()
+    expect(checkoutButton).toHaveAttribute('href', '/checkout')
+  })
+
+  it('APIからカートデータを取得すること', async () => {
+    await Cart()
+    expect(getCartItems).toHaveBeenCalled()
   })
 }) 

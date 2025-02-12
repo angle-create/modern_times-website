@@ -3,7 +3,6 @@
 import { useSession } from 'next-auth/react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
 
 const navigation = [
   { name: 'ダッシュボード', href: '/admin' },
@@ -20,16 +19,7 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode
 }) {
-  const { data: session, status } = useSession()
   const pathname = usePathname()
-
-  if (status === 'loading') {
-    return <div>Loading...</div>
-  }
-
-  if (!session || session.user.role !== 'admin') {
-    redirect('/admin/login')
-  }
 
   return (
     <div className="min-h-screen bg-gray-100">

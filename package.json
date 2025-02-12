@@ -13,6 +13,9 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
+  "prisma": {
+    "seed": "node --loader ts-node/esm prisma/seed.ts"
+  },
   "dependencies": {
     "@auth/core": "^0.37.4",
     "@auth/prisma-adapter": "^2.7.4",
@@ -34,9 +37,11 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.1.6",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^14.6.1",
+    "@types/bcrypt": "^5.0.2",
     "@types/jest": "^29.5.14",
     "@types/node": "^20.11.16",
     "@types/react": "^18.2.52",

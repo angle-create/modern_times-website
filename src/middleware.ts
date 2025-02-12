@@ -1,22 +1,34 @@
-import { withAuth } from 'next-auth/middleware'
 import { NextResponse } from 'next/server'
+import { getToken } from 'next-auth/jwt'
+import type { NextRequest } from 'next/server'
 
-export default withAuth(
-  function middleware(req) {
-    const token = req.nextauth.token
-    const isAdmin = token?.role === 'admin'
-    const isAdminRoute = req.nextUrl.pathname.startsWith('/admin')
+export async function middleware(request: NextRequest) {
+  const path = request.nextUrl.pathname
+  
+  // ログインページは常にアクセス可能
+  if (path === '/admin/login') {
+    return NextResponse.next()
+  }
 
-    if (isAdminRoute && !isAdmin) {
-      return NextResponse.redirect(new URL('/admin/login', req.url))
+  // 管理画面のパスチェック
+  if (path.startsWith('/admin')) {
+    const token = await getToken({ req: request })
+    
+    // 未認証の場合
+    if (!token) {
+      const url = new URL('/admin/login', request.url)
+      return NextResponse.redirect(url)
     }
-  },
-  {
-    callbacks: {
-      authorized: ({ token }) => !!token
+
+    // 管理者権限チェック
+    if (token.role !== 'admin') {
+      const url = new URL('/admin/login', request.url)
+      return NextResponse.redirect(url)
     }
   }
-)
+
+  return NextResponse.next()
+}
 
 export const config = {
   matcher: ['/admin/:path*']
