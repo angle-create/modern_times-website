@@ -27,6 +27,12 @@
 - **アニメーション**: Framer Motion
 - **CMS**: Contentful
 - **ホスティング**: Vercel
+- **バックエンド**: 
+  - **API**: Next.js API Routes
+  - **データベース**: PostgreSQL
+  - **ORM**: Prisma
+  - **認証**: NextAuth.js
+  - **画像ストレージ**: Cloudinary
 
 ## 4. 改善ポイント
 - ナビゲーションの簡素化
@@ -58,3 +64,96 @@
   - テスト
   - パフォーマンス最適化
   - コンテンツ調整
+
+## 6. バックエンド設計
+
+### 6.1 データベース設計
+```sql
+-- 商品カテゴリ
+CREATE TABLE categories (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  slug VARCHAR(100) NOT NULL UNIQUE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 商品
+CREATE TABLE products (
+  id SERIAL PRIMARY KEY,
+  category_id INTEGER REFERENCES categories(id),
+  name VARCHAR(200) NOT NULL,
+  description TEXT,
+  price INTEGER NOT NULL,
+  image_url VARCHAR(500),
+  is_available BOOLEAN DEFAULT true,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- お知らせ
+CREATE TABLE news (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(200) NOT NULL,
+  content TEXT NOT NULL,
+  image_url VARCHAR(500),
+  published_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 店舗情報
+CREATE TABLE store_info (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  address TEXT NOT NULL,
+  phone VARCHAR(20),
+  email VARCHAR(100),
+  business_hours TEXT,
+  parking_info TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- お問い合わせ
+CREATE TABLE inquiries (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  subject VARCHAR(200) NOT NULL,
+  message TEXT NOT NULL,
+  status VARCHAR(20) DEFAULT 'pending',
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+### 6.2 API エンドポイント
+```
+/api
+├── products
+│   ├── GET /api/products - 商品一覧取得
+│   ├── GET /api/products/:id - 商品詳細取得
+│   └── GET /api/products/category/:slug - カテゴリ別商品取得
+├── news
+│   ├── GET /api/news - お知らせ一覧取得
+│   └── GET /api/news/:id - お知らせ詳細取得
+├── store
+│   └── GET /api/store - 店舗情報取得
+└── contact
+    └── POST /api/contact - お問い合わせ送信
+```
+
+### 6.3 セキュリティ対策
+- CORS設定
+- Rate Limiting
+- API認証（管理画面用）
+- XSS対策
+- CSRF対策
+- 入力値バリデーション
+
+### 6.4 パフォーマンス最適化
+- キャッシュ戦略
+- 画像最適化
+- データベースインデックス
+- クエリ最適化
