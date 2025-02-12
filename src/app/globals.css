@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brown-50: #fdf8f6;
+  --brown-100: #f2e8e5;
+  --brown-200: #eaddd7;
+  --brown-300: #e0cec7;
+  --brown-400: #d2bab0;
+  --brown-500: #bfa094;
+  --brown-600: #a18072;
+  --brown-700: #977669;
+  --brown-800: #846358;
+  --brown-900: #43302b;
+}
+
+@layer base {
+  body {
+    @apply text-gray-900 bg-white;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-brown-600 text-white px-4 py-2 rounded-md hover:bg-brown-700 transition-colors;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-brown-600 border border-brown-600 px-4 py-2 rounded-md hover:bg-brown-50 transition-colors;
+  }
+
+  .section-title {
+    @apply text-2xl font-bold text-brown-900 mb-6;
+  }
+
+  .container-padding {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+} 
