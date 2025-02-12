@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: modern_times_db
+    restart: always
+    environment:
+      POSTGRES_USER: modern_times
+      POSTGRES_PASSWORD: modern_times_pass
+      POSTGRES_DB: modern_times_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data: 
