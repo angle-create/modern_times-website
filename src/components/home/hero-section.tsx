@@ -1,17 +1,14 @@
-import Image from 'next/image'
 import Link from 'next/link'
+import { ProductImage } from '@/components/ui/product-image'
 
 export function HeroSection() {
   return (
     <div className="relative">
-      {/* 仮の画像を使用。後で実際の店舗画像に置き換え */}
       <div className="relative h-[70vh] min-h-[600px]">
-        <Image
-          src="/images/hero.jpg"
+        <ProductImage
+          src="/images/placeholder.png"
           alt="Modern Times店内"
-          fill
-          className="object-cover"
-          priority
+          className="h-[70vh] min-h-[600px]"
         />
         <div className="absolute inset-0 bg-black bg-opacity-40" />
         <div className="absolute inset-0 flex items-center justify-center">
