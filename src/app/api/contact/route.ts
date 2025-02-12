@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { z } from 'zod'
 
 const contactSchema = z.object({
@@ -8,6 +10,33 @@ const contactSchema = z.object({
   subject: z.string().min(1, '件名は必須です'),
   message: z.string().min(1, 'メッセージは必須です'),
 })
+
+export async function GET() {
+  try {
+    const session = await getServerSession(authOptions)
+    
+    if (!session || session.user.role !== 'admin') {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      )
+    }
+
+    const inquiries = await prisma.inquiry.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+    })
+
+    return NextResponse.json(inquiries)
+  } catch (error) {
+    console.error('Inquiries fetch error:', error)
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 }
+    )
+  }
+}
 
 export async function POST(request: Request) {
   try {
