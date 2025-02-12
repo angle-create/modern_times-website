@@ -8,12 +8,45 @@
 - レスポンス形式: JSON
 - 文字エンコーディング: UTF-8
 
-### 1.2 認証
+### 1.2 APIバージョニング戦略
+#### バージョン管理方針
+- URLベースのバージョニング採用
+- メジャーバージョンのみをURLに含める
+- 下位互換性のない変更時にバージョンを更新
+
+#### バージョン移行計画
+- 新バージョンリリース後、旧バージョンを6ヶ月間維持
+- 移行期間中は両バージョンを並行稼働
+- 移行期間終了の1ヶ月前にユーザーへ通知
+
+### 1.3 認証
 - JWT認証
 - トークンの有効期限: 24時間
 - リフレッシュトークンの有効期限: 30日
 
-### 1.3 共通レスポンス形式
+### 1.4 OpenAPI仕様
+```yaml
+openapi: 3.0.0
+info:
+  title: Modern Times API
+  version: 1.0.0
+  description: Modern Times ECサイトのAPI仕様
+servers:
+  - url: https://api.modern-times.com/v1
+    description: 本番環境
+  - url: https://stg-api.modern-times.com/v1
+    description: ステージング環境
+security:
+  - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+```
+
+### 1.5 共通レスポンス形式
 #### 成功時
 ```json
 {
@@ -36,6 +69,18 @@
 ```
 
 ## 2. エンドポイント一覧
+
+### 実装状況
+| エンドポイント | メソッド | 実装状況 | テスト状況 |
+|--------------|---------|----------|-----------|
+| /auth/login | POST | ✅ 完了 | ✅ 完了 |
+| /products | GET | ✅ 完了 | ✅ 完了 |
+| /products | POST | ✅ 完了 | ✅ 完了 |
+| /products/{id} | GET | ✅ 完了 | ✅ 完了 |
+| /cart | GET | ✅ 完了 | ✅ 完了 |
+| /cart | POST | ✅ 完了 | ✅ 完了 |
+| /orders | POST | ✅ 完了 | ✅ 完了 |
+| /orders/{id} | GET | ✅ 完了 | ✅ 完了 |
 
 ### 2.1 認証API
 #### ログイン
