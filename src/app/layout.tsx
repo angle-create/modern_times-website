@@ -23,7 +23,7 @@ export default function RootLayout({
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16">
               <div className="flex-shrink-0 flex items-center">
-                <Link href="/" className="relative w-40 h-8">
+                <Link href="/" className="relative w-80 h-16">
                   <Image
                     src="/images/site-logo.png"
                     alt="Modern Times"
@@ -67,7 +67,7 @@ export default function RootLayout({
           <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div className="col-span-1 md:col-span-2">
-                <Link href="/" className="relative w-40 h-8 mb-4 inline-block">
+                <Link href="/" className="relative w-80 h-16 mb-4 inline-block">
                   <Image
                     src="/images/site-logo.png"
                     alt="Modern Times"
