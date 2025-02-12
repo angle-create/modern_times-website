@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar(100)
+  slug      String    @unique @db.VarChar(100)
+  products  Product[]
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime  @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("categories")
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  categoryId  Int      @map("category_id")
+  name        String   @db.VarChar(200)
+  description String?  @db.Text
+  price       Int
+  imageUrl    String?  @map("image_url") @db.VarChar(500)
+  isAvailable Boolean  @default(true) @map("is_available")
+  category    Category @relation(fields: [categoryId], references: [id])
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("products")
+}
+
+model News {
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(200)
+  content     String   @db.Text
+  imageUrl    String?  @map("image_url") @db.VarChar(500)
+  publishedAt DateTime @default(now()) @map("published_at") @db.Timestamptz
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("news")
+}
+
+model StoreInfo {
+  id            Int      @id @default(autoincrement())
+  name          String   @db.VarChar(100)
+  address       String   @db.Text
+  phone         String?  @db.VarChar(20)
+  email         String?  @db.VarChar(100)
+  businessHours String?  @map("business_hours") @db.Text
+  parkingInfo   String?  @map("parking_info") @db.Text
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt     DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("store_info")
+}
+
+model Inquiry {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(100)
+  email     String   @db.VarChar(100)
+  subject   String   @db.VarChar(200)
+  message   String   @db.Text
+  status    String   @default("pending") @db.VarChar(20)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("inquiries")
+} 
