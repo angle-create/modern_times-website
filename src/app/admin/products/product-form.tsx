@@ -1,7 +1,8 @@
 'use client'
 
 import { Category, Product } from '@prisma/client'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
+import { ImageUpload } from './image-upload'
 
 interface ProductFormProps {
   categories: Category[]
@@ -17,11 +18,13 @@ export function ProductForm({
   submitLabel,
 }: ProductFormProps) {
   const formRef = useRef<HTMLFormElement>(null)
+  const [imageUrl, setImageUrl] = useState(product?.imageUrl || '')
 
   return (
     <form
       ref={formRef}
       action={async (formData) => {
+        formData.set('imageUrl', imageUrl)
         await action(formData)
         formRef.current?.reset()
       }}
@@ -110,19 +113,12 @@ export function ProductForm({
         </div>
 
         <div className="sm:col-span-2">
-          <label
-            htmlFor="imageUrl"
-            className="block text-sm font-medium text-gray-700"
-          >
-            商品画像URL
+          <label className="block text-sm font-medium text-gray-700">
+            商品画像
           </label>
-          <input
-            type="url"
-            name="imageUrl"
-            id="imageUrl"
-            defaultValue={product?.imageUrl || ''}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring-brown-500 sm:text-sm"
-          />
+          <div className="mt-1">
+            <ImageUpload value={imageUrl} onChange={setImageUrl} />
+          </div>
         </div>
 
         <div className="sm:col-span-2">
