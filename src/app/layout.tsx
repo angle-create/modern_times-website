@@ -22,45 +22,43 @@ export default function RootLayout({
         <header className="bg-white shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16">
-              <div className="flex">
-                <div className="flex-shrink-0 flex items-center">
-                  <Link href="/" className="relative w-40 h-8">
-                    <Image
-                      src="/images/site-logo.png"
-                      alt="Modern Times"
-                      fill
-                      className="object-contain"
-                      priority
-                    />
-                  </Link>
-                </div>
-                <nav className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                  <Link
-                    href="/products"
-                    className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900"
-                  >
-                    商品一覧
-                  </Link>
-                  <Link
-                    href="/about"
-                    className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900"
-                  >
-                    店舗案内
-                  </Link>
-                  <Link
-                    href="/news"
-                    className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900"
-                  >
-                    お知らせ
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900"
-                  >
-                    お問い合わせ
-                  </Link>
-                </nav>
+              <div className="flex-shrink-0 flex items-center">
+                <Link href="/" className="relative w-40 h-8">
+                  <Image
+                    src="/images/site-logo.png"
+                    alt="Modern Times"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </Link>
               </div>
+              <nav className="hidden sm:flex sm:space-x-8 items-center">
+                <Link
+                  href="/products"
+                  className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-brown-600"
+                >
+                  商品一覧
+                </Link>
+                <Link
+                  href="/about"
+                  className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-brown-600"
+                >
+                  店舗案内
+                </Link>
+                <Link
+                  href="/news"
+                  className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-brown-600"
+                >
+                  お知らせ
+                </Link>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-brown-600"
+                >
+                  お問い合わせ
+                </Link>
+              </nav>
             </div>
           </div>
         </header>
