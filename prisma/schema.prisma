@@ -125,4 +125,13 @@ model Inquiry {
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
 
   @@map("inquiries")
+}
+
+model PageView {
+  id        Int      @id @default(autoincrement())
+  path      String   @db.VarChar(255)
+  userAgent String?  @map("user_agent") @db.Text
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  @@map("page_views")
 } 
