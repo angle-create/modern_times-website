@@ -85,6 +85,7 @@ model Product {
   alertThreshold Int       @default(5) @map("alert_threshold")
   category    Category     @relation(fields: [categoryId], references: [id])
   stockLogs   StockLog[]
+  orderItems  OrderItem[]
   createdAt   DateTime     @default(now()) @map("created_at") @db.Timestamptz
   updatedAt   DateTime     @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
 
@@ -149,4 +150,35 @@ model PageView {
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
 
   @@map("page_views")
+}
+
+model Order {
+  id            Int          @id @default(autoincrement())
+  orderNumber   String       @unique @map("order_number") @db.VarChar(50)
+  customerName  String       @map("customer_name") @db.VarChar(100)
+  customerEmail String       @map("customer_email") @db.VarChar(100)
+  customerPhone String?      @map("customer_phone") @db.VarChar(20)
+  status        String       @default("pending") @db.VarChar(20)
+  totalAmount   Int          @map("total_amount")
+  note          String?      @db.Text
+  items         OrderItem[]
+  createdAt     DateTime     @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt     DateTime     @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id          Int      @id @default(autoincrement())
+  orderId     Int      @map("order_id")
+  productId   Int      @map("product_id")
+  name        String   @db.VarChar(200)
+  price       Int
+  quantity    Int
+  order       Order    @relation(fields: [orderId], references: [id])
+  product     Product  @relation(fields: [productId], references: [id])
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("order_items")
 } 
