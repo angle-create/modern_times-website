@@ -10,10 +10,10 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className={isAdminPage ? 'min-h-screen flex flex-col' : ''}>
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between h-20">
-            {!isAdminPage && (
+      {!isAdminPage && (
+        <header className="bg-white shadow-sm">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex justify-between h-20">
               <div className="flex-shrink-0 flex items-center flex-col justify-center">
                 <p className="text-xs text-gray-600 mb-1 mt-2 pl-[30px]">
                   盛岡のウェディングケーキやバースデーケーキはモダンタイムスへ
@@ -28,8 +28,6 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                   />
                 </Link>
               </div>
-            )}
-            {!isAdminPage && (
               <nav className="hidden sm:flex sm:space-x-8 items-center pr-4 sm:pr-6 lg:pr-8 pt-8">
                 <Link
                   href="/products"
@@ -56,10 +54,10 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                   お問い合わせ
                 </Link>
               </nav>
-            )}
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
+      )}
       <main className={isAdminPage ? 'flex-grow' : ''}>{children}</main>
       {!isAdminPage && (
         <footer className="bg-white">
