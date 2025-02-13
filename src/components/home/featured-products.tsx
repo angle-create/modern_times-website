@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ProductImage } from '@/components/ui/product-image'
+import Image from 'next/image'
 
 type Product = {
   id: number
@@ -36,45 +37,32 @@ export function FeaturedProducts() {
   ]
 
   return (
-    <section className="py-16 bg-brown-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="section-title text-center">おすすめ商品</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105"
-            >
-              <ProductImage
-                src={product.imageUrl}
-                alt={product.name}
-                className="h-48"
-              />
-              <div className="p-4">
-                <h3 className="text-lg font-semibold text-brown-900 mb-2">
-                  {product.name}
-                </h3>
-                <p className="text-gray-600 text-sm mb-4">
-                  {product.description}
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="text-brown-600 font-bold">
-                    ¥{product.price}
-                  </span>
-                  <Link
-                    href={`/menu#${product.id}`}
-                    className="btn-secondary text-sm"
-                  >
-                    詳しく見る
-                  </Link>
-                </div>
-              </div>
-            </div>
-          ))}
+    <section className="py-8 bg-brown-50">
+      <div className="max-w-5xl mx-auto px-4">
+        <div className="grid grid-cols-2 gap-4">
+          <div className="relative w-full aspect-[3/2]">
+            <Image
+              src="/images/topbn1.png"
+              alt="おすすめアイコン1"
+              fill
+              className="object-contain"
+            />
+          </div>
+          <div className="relative w-full aspect-[3/2]">
+            <Image
+              src="/images/topbn2.png"
+              alt="おすすめアイコン2"
+              fill
+              className="object-contain"
+            />
+          </div>
         </div>
-        <div className="text-center mt-12">
-          <Link href="/menu" className="btn-primary">
-            メニューをすべて見る
+        <div className="text-center mt-8">
+          <Link
+            href="/products"
+            className="inline-block bg-brown-600 text-white px-8 py-3 rounded-md hover:bg-brown-700 transition-colors"
+          >
+            商品一覧を見る
           </Link>
         </div>
       </div>
