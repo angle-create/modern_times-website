@@ -9,7 +9,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
   const isAdminPage = pathname?.startsWith('/admin')
 
   return (
-    <>
+    <div className={isAdminPage ? 'min-h-screen flex flex-col' : ''}>
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between h-20">
@@ -58,7 +58,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       </header>
-      <main>{children}</main>
+      <main className={isAdminPage ? 'flex-grow' : ''}>{children}</main>
       {!isAdminPage && (
         <footer className="bg-white">
           <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
@@ -147,6 +147,6 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
           </div>
         </footer>
       )}
-    </>
+    </div>
   )
 } 
