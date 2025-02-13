@@ -20,7 +20,7 @@ const slides = [
   },
   {
     id: 3,
-    image: '/images/slides/cake3.jpg',
+    image: '/images/slides/anniversary.jpg',
     title: '記念日ケーキ',
     description: '大切な記念日を彩る'
   },
