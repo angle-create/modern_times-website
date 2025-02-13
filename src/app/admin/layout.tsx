@@ -6,7 +6,6 @@ import Link from 'next/link'
 const navigation = [
   { name: 'ダッシュボード', href: '/admin' },
   { name: '商品管理', href: '/admin/products' },
-  { name: '在庫管理', href: '/admin/inventory' },
   { name: '注文管理', href: '/admin/orders' },
   { name: 'レビュー管理', href: '/admin/reviews' },
   { name: 'お知らせ管理', href: '/admin/news' },
