@@ -13,20 +13,22 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between h-20">
-            <div className="flex-shrink-0 flex items-center flex-col justify-center">
-              <p className="text-xs text-gray-600 mb-1 mt-2 pl-[30px]">
-                盛岡のウェディングケーキやバースデーケーキはモダンタイムスへ
-              </p>
-              <Link href="/" className="relative w-80 h-16 pl-[10px]">
-                <Image
-                  src="/images/site-logo.png"
-                  alt="モダンタイムス - 記念日ケーキ専門店"
-                  fill
-                  className="object-contain object-left"
-                  priority
-                />
-              </Link>
-            </div>
+            {!isAdminPage && (
+              <div className="flex-shrink-0 flex items-center flex-col justify-center">
+                <p className="text-xs text-gray-600 mb-1 mt-2 pl-[30px]">
+                  盛岡のウェディングケーキやバースデーケーキはモダンタイムスへ
+                </p>
+                <Link href="/" className="relative w-80 h-16 pl-[10px]">
+                  <Image
+                    src="/images/site-logo.png"
+                    alt="モダンタイムス - 記念日ケーキ専門店"
+                    fill
+                    className="object-contain object-left"
+                    priority
+                  />
+                </Link>
+              </div>
+            )}
             {!isAdminPage && (
               <nav className="hidden sm:flex sm:space-x-8 items-center pr-4 sm:pr-6 lg:pr-8 pt-8">
                 <Link
