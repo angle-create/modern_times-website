@@ -45,7 +45,7 @@ export default function AdminLayout({
         </div>
       </nav>
 
-      {!isLoginPage && (
+      {!isLoginPage ? (
         <div className="py-6">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-12 gap-6">
@@ -81,9 +81,11 @@ export default function AdminLayout({
             </div>
           </div>
         </div>
+      ) : (
+        <div className="flex-1">
+          {children}
+        </div>
       )}
-
-      {isLoginPage && children}
     </div>
   )
 } 
