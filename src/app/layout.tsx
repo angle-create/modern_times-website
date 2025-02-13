@@ -1,9 +1,11 @@
+'use client'
+
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Link from 'next/link'
 import Image from 'next/image'
-import { headers } from 'next/headers'
+import { usePathname } from 'next/navigation'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,9 +19,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const headersList = headers()
-  const pathname = headersList.get('x-pathname') || ''
-  const isAdminPage = pathname.startsWith('/admin')
+  const pathname = usePathname()
+  const isAdminPage = pathname?.startsWith('/admin')
 
   return (
     <html lang="ja">
