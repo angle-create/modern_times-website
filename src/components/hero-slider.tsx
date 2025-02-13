@@ -8,13 +8,13 @@ import 'slick-carousel/slick/slick-theme.css'
 const slides = [
   {
     id: 1,
-    image: '/images/slides/squarebook.jpg',
+    image: '/images/slides/cake1.jpg',
     title: 'バースデーケーキ',
     description: '誕生日を特別な思い出に'
   },
   {
     id: 2,
-    image: '/images/slides/cake2.jpg',
+    image: '/images/slides/squarebook.jpg',
     title: 'ウェディングケーキ',
     description: '幸せな瞬間をより美しく'
   },
