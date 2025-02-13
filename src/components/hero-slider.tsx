@@ -26,7 +26,7 @@ const slides = [
   },
   {
     id: 4,
-    image: '/images/slides/cake4.jpg',
+    image: '/images/slides/party.jpg',
     title: 'パーティーケーキ',
     description: 'みんなで楽しむ特別なケーキ'
   }
