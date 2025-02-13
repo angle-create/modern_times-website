@@ -18,7 +18,23 @@ async function main() {
     },
   });
 
-  console.log({ admin });
+  // Create store information
+  const storeInfo = await prisma.storeInfo.upsert({
+    where: { id: 1 },
+    update: {},
+    create: {
+      name: 'Modern Times 本店',
+      address: '〒020-0871 岩手県盛岡市中ノ橋通1-5-23',
+      phone: '019-123-4567',
+      email: 'info@modern-times.com',
+      businessHours: `平日: 10:00 - 19:00
+土日祝: 9:00 - 18:00
+定休日: 毎週水曜日`,
+      parkingInfo: '店舗前に4台、提携駐車場に10台あり',
+    },
+  });
+
+  console.log({ admin, storeInfo });
 }
 
 main()
