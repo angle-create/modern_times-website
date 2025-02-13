@@ -25,25 +25,27 @@ export default function AdminLayout({
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <nav className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex">
-              <div className="flex-shrink-0 flex items-center">
-                <Link href="/admin" className="relative w-40 h-8">
-                  <Image
-                    src="/images/site-logo.png"
-                    alt="Modern Times 管理画面"
-                    fill
-                    className="object-contain"
-                    priority
-                  />
-                </Link>
+      {!isLoginPage && (
+        <nav className="bg-white shadow-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between h-16">
+              <div className="flex">
+                <div className="flex-shrink-0 flex items-center">
+                  <Link href="/admin" className="relative w-40 h-8">
+                    <Image
+                      src="/images/site-logo.png"
+                      alt="Modern Times 管理画面"
+                      fill
+                      className="object-contain"
+                      priority
+                    />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </nav>
+        </nav>
+      )}
 
       {!isLoginPage ? (
         <div className="py-6">
